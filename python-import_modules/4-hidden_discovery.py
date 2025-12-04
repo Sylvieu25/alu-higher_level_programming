@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-import hidden_4
+import importlib.util
 
 if __name__ == "__main__":
-    for name in sorted(dir(hidden_4)):
-        if not name.startswith("__"):
-            print(name)
+    spec = importlib.util.spec_from_file_location("hidden_4", "hidden_4.pyc")
+    hidden_4 = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(hidden_4)
+
+    for name in sorted(n for n in dir(hidden_4) if not n.startswith("__")):
+        print(name)
+
 
 
